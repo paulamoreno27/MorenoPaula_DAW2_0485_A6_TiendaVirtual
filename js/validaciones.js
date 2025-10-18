@@ -30,12 +30,10 @@ productoSelect.addEventListener("change", () => {
   }
 
   camposDiv.innerHTML = campos;
-
-  // Reasignar eventos en tiempo real para los campos dinámicos
-  asignarEventosTiempoReal();
+  asignarEventosTiempoReal(); // reactivar validaciones dinámicas
 });
 
-// Función genérica de validación
+// ==== FUNCIÓN DE VALIDACIÓN ====
 function validarCampo(campo, tipo = "texto") {
   const errorDiv = document.getElementById(campo.id + "-error");
   const valor = campo.value.trim();
@@ -43,12 +41,19 @@ function validarCampo(campo, tipo = "texto") {
   campo.classList.remove("error-input");
   if (errorDiv) errorDiv.textContent = "";
 
+  // 1. El campo descuento es opcional → si está vacío, no hay error
+  if (campo.id === "descuento" && valor === "") {
+    return true;
+  }
+
+  // 2. Campos vacíos no permitidos (excepto descuento)
   if (valor === "") {
     campo.classList.add("error-input");
     if (errorDiv) errorDiv.textContent = "*Este campo no puede estar vacío";
     return false;
   }
 
+  // 3. Validaciones numéricas
   if (tipo === "numero") {
     const num = parseFloat(valor.replace(/,/g, "."));
     if (isNaN(num)) {
@@ -63,7 +68,8 @@ function validarCampo(campo, tipo = "texto") {
     }
   }
 
-  if (campo.id === "descuento") {
+  // 4. Validación específica de descuento si se introduce algo
+  if (campo.id === "descuento" && valor !== "") {
     const num = parseFloat(valor.replace(/,/g, "."));
     if (num < 0 || num > 100) {
       campo.classList.add("error-input");
@@ -75,13 +81,12 @@ function validarCampo(campo, tipo = "texto") {
   return true;
 }
 
-// Asignar validación en tiempo real
+// ==== VALIDACIÓN EN TIEMPO REAL ====
 function asignarEventosTiempoReal() {
   const inputs = document.querySelectorAll("#formulario input, #formulario select");
 
   inputs.forEach((input) => {
     input.addEventListener("blur", () => {
-      // Valida al salir del campo
       if (input.type === "number" || input.id === "precio" || input.id === "cantidad" || input.id === "descuento") {
         validarCampo(input, "numero");
       } else {
@@ -90,28 +95,19 @@ function asignarEventosTiempoReal() {
     });
 
     input.addEventListener("input", () => {
-      // Si el usuario escribe algo válido, se limpia el error
-      if (input.type === "number" || input.id === "precio" || input.id === "cantidad" || input.id === "descuento") {
-        if (validarCampo(input, "numero")) {
-          input.classList.remove("error-input");
-          const errorDiv = document.getElementById(input.id + "-error");
-          if (errorDiv) errorDiv.textContent = "";
-        }
-      } else {
-        if (validarCampo(input)) {
-          input.classList.remove("error-input");
-          const errorDiv = document.getElementById(input.id + "-error");
-          if (errorDiv) errorDiv.textContent = "";
-        }
+      if (validarCampo(input)) {
+        input.classList.remove("error-input");
+        const errorDiv = document.getElementById(input.id + "-error");
+        if (errorDiv) errorDiv.textContent = "";
       }
     });
   });
 }
 
-// Inicializa los eventos
+// Inicializar eventos
 asignarEventosTiempoReal();
 
-// Validar formulario al enviar
+// ==== VALIDAR FORMULARIO AL ENVIAR ====
 document.getElementById("formulario").addEventListener("submit", function (e) {
   let formularioValido = true;
 
@@ -125,7 +121,11 @@ document.getElementById("formulario").addEventListener("submit", function (e) {
   if (!validarCampo(nombre)) formularioValido = false;
   if (!validarCampo(precio, "numero")) formularioValido = false;
   if (!validarCampo(cantidad, "numero")) formularioValido = false;
-  if (!validarCampo(descuento, "numero")) formularioValido = false;
+
+  // Solo validar descuento si el usuario escribió algo
+  if (descuento.value.trim() !== "") {
+    if (!validarCampo(descuento, "numero")) formularioValido = false;
+  }
 
   const tipoProducto = producto.value;
   if (tipoProducto === "camiseta") {
