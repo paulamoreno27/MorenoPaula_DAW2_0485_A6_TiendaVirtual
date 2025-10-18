@@ -50,9 +50,9 @@ $ahorro = $totalSinDescuento - $totalConDescuento;
 <head>
     <meta charset="UTF-8">
     <title>Resumen del pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
@@ -72,7 +72,7 @@ $ahorro = $totalSinDescuento - $totalConDescuento;
             <p class="text-success"><strong>Has ahorrado:</strong> <?= number_format($ahorro, 2) ?> €</p>
         <?php endif; ?>
         <div class="text-center mt-4">
-            <a href="../index.php" class="btn btn-secondary">Volver</a>
+            <a href="../index.php" class="btn btn-secondary w-100 mt-3">Volver al inicio</a>
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap');
+/* FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap');
 
-/* ======== ESTILO GENERAL ======== */
+/* ESTILO GENERAL */
 body {
     background: linear-gradient(135deg, #fff3e0, #ffd8a6);
     min-height: 100vh;
@@ -11,42 +12,45 @@ body {
     padding-top: 20px; /* ↓ reducido el espacio superior */
 }
 
-/* ======== CONTENEDOR ======== */
+/* CONTENEDOR */
 .container {
-    max-width: 650px;
+    max-width: 750px; /* 💡 más ancho */
 }
 
-/* ======== TÍTULO PRINCIPAL ======== */
+/* TÍTULO PRINCIPAL */
 h1 {
     color: #d35400;
+    font-family: 'Montserrat', sans-serif; /* 💪 fuente más gruesa */
     font-weight: 800;
     text-align: center;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
-    margin-top: 10px;    /* ↓ menos margen superior */
+    margin-top: 10px;
     margin-bottom: 25px;
     letter-spacing: 1px;
 }
 
-/* ======== TARJETAS ======== */
+/* TARJETAS */
 .card {
     border: none;
-    border-radius: 18px;
+    border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.96);
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     transition: transform 0.25s ease-in-out;
     animation: aparecer 0.5s ease-in-out;
+    padding: 2rem;
 }
 
 .card:hover {
     transform: translateY(-2px);
 }
 
-/* ======== CAMPOS DEL FORMULARIO ======== */
+/* CAMPOS DEL FORMULARIO */
 .form-control, 
 .form-select {
     border-radius: 10px;
     border: 2px solid #f5b041;
     transition: 0.3s;
+    font-size: 1rem;
 }
 
 .form-control:focus, 
@@ -55,32 +59,35 @@ h1 {
     box-shadow: 0 0 8px rgba(230, 126, 34, 0.4);
 }
 
-/* ======== BOTONES (Ver resumen y Volver) ======== */
+/* BOTONES (Ver resumen y Volver) */
 .btn-primary,
 .btn-secondary {
     background: linear-gradient(90deg, #f39c12, #e67e22);
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif; /* 💪 más gordita */
     font-weight: 700;
     letter-spacing: 0.4px;
     color: white;
     transition: all 0.3s ease;
+    font-size: 1rem;
+    padding: 12px 0;
 }
 
 .btn-primary:hover,
 .btn-secondary:hover {
     background: linear-gradient(90deg, #e67e22, #f39c12);
-    transform: scale(1.02);
+    transform: scale(1.03);
     box-shadow: 0 3px 8px rgba(230, 126, 34, 0.4);
 }
 
-/* ======== TEXTO DE AHORRO ======== */
+/* TEXTO DE AHORRO */
 .text-success {
     color: #27ae60 !important;
     font-weight: 700;
 }
 
-/* ======== ERRORES ======== */
+/* ERRORES */
 .error-input {
     border: 2px solid #e74c3c !important;
     background-color: #fff5f5;
@@ -93,14 +100,16 @@ h1 {
     color: #c0392b !important;
 }
 
-/* ======== TÍTULOS DENTRO DE TARJETAS ======== */
+/* TÍTULOS DENTRO DE TARJETAS */
 .card-title {
     color: #e67e22;
-    font-weight: bold;
+    font-family: 'Montserrat', sans-serif; /* 💪 más gruesa */
+    font-weight: 700;
     text-align: center;
+    font-size: 1.3rem;
 }
 
-/* ======== ANIMACIÓN SUAVE ======== */
+/* ANIMACIÓN SUAVE */
 @keyframes aparecer {
     from {
         opacity: 0;
