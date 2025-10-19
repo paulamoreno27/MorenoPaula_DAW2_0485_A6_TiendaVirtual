@@ -60,7 +60,7 @@
     <!-- Campo: Descuento -->
     <div class="mb-3">
       <label for="descuento" class="form-label">Descuento (%)</label>
-      <input type="text" name="descuento" id="descuento" class="form-control" value="0">
+      <input type="text" name="descuento" id="descuento" class="form-control" placeholder="Ej: 10">
       <div id="descuento-error" class="text-danger small mt-1"></div>
     </div>
 
